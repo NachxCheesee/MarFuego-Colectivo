@@ -10,6 +10,8 @@ public class ErrorDto {
 
     private LocalDateTime timestamp;
 
+    public ErrorDto() {};
+
     public ErrorDto(int status, String mensaje, LocalDateTime timestamp) {
         this.status = status;
         this.mensaje = mensaje;

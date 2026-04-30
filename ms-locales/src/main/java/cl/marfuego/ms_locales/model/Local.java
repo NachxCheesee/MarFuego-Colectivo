@@ -3,9 +3,11 @@ package cl.marfuego.ms_locales.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "locales")
 public class Local {
 
     @Id
@@ -17,18 +19,16 @@ public class Local {
     private String direccion;
 
     private String ciudad;
-
-    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
-    private List<Mesa> mesas;
+    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Mesa> mesas = new ArrayList<>();
 
     public Local() {}
 
-    public Local(Long id, String nombre, String direccion, String ciudad, List<Mesa> mesas) {
+    public Local(Long id, String nombre, String direccion, String ciudad) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
-        this.mesas = mesas;
     }
 
     public Long getId() {

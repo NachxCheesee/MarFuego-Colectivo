@@ -1,7 +1,10 @@
 package cl.marfuego.ms_locales.service;
 
 
+import cl.marfuego.ms_locales.dto.LocalDto;
+import cl.marfuego.ms_locales.dto.MesaDto;
 import cl.marfuego.ms_locales.enums.EstadoMesa;
+import cl.marfuego.ms_locales.exception.custom.ErrorNoEncontrado;
 import cl.marfuego.ms_locales.model.Local;
 import cl.marfuego.ms_locales.model.Mesa;
 import cl.marfuego.ms_locales.repository.LocalRepository;
@@ -24,9 +27,6 @@ public class LocalService {
         this.mesaRepository = mesaRepository;
     }
 
-    // listar buscar guardar eliminar
-    // guardar mesa eliminar mesa
-
     public List<Local> listarLocales() {
 
         return localRepository.findAll();
@@ -35,17 +35,19 @@ public class LocalService {
 
     public Local buscarLocalPorId(Long id) {
 
-        Optional<Local> local = localRepository.findById(id);
-
-
-        return local.orElse(null);
+        return localRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se encontró el local con ID: " + id));
 
     }
 
-    public Local guardarLocal(Local local) {
+    public Local guardarLocal(LocalDto dto) {
+
+        // Convertimos el dto en una Entidad Local
+        Local local = new Local();
+        local.setNombre(dto.getNombre());
+        local.setDireccion(dto.getDireccion());
+        local.setCiudad(dto.getCiudad());
 
         return localRepository.save(local);
-
 
     }
 
@@ -58,6 +60,9 @@ public class LocalService {
 
     public void eliminarLocal(Long id) {
 
+        if (!localRepository.existsById(id)) {
+            throw new ErrorNoEncontrado("No se puede eliminar: El local " + id + " no existe.");
+        }
         localRepository.deleteById(id);
 
 
@@ -74,48 +79,50 @@ public class LocalService {
 
     public Mesa buscarMesaPorId(Long id) {
 
-        Optional<Mesa> mesa = mesaRepository.findById(id);
-
-
-        return mesa.orElse(null);
+        return mesaRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se encontró la mesa con ID: " + id));
 
     }
 
-    public Mesa guardarMesa(Mesa mesa) {
+    public Mesa guardarMesa(MesaDto dto) {
+
+        // 1. Buscamos el local al que pertenece la mesa (VITAL)
+        Local local = localRepository.findById(dto.getLocalId()).orElseThrow(() -> new ErrorNoEncontrado("No se pudo crear la mesa: Local " + dto.getLocalId() + " no existe."));
+
+        // 2. Creamos la mesa y le "enchufamos" el local completo
+        Mesa mesa = new Mesa();
+        mesa.setNumeroMesa(dto.getNumeroMesa());
+        mesa.setCapacidad(dto.getCapacidad());
+        mesa.setLocal(local); // Aquí se crea la relación en la BD
+
+        // El estado se asigna automáticamente como LIBRE en la entidad Mesa
+        if (dto.getEstado() != null) {
+            mesa.setEstado(dto.getEstado());
+        }
 
         return mesaRepository.save(mesa);
-
 
     }
 
 
     public void eliminarMesa(Long id) {
 
+        if (!mesaRepository.existsById(id)) {
+            throw new ErrorNoEncontrado("No se puede eliminar: La mesa " + id + " no existe.");
+        }
         mesaRepository.deleteById(id);
-
     }
 
 
-    public boolean existeMesaPorId(Long id) {
-
-        return mesaRepository.existsById(id);
-
-
-    }
-
-    public List<Mesa> obtenerDisponiblesPorLocal(Long localId, EstadoMesa estado) {
+    public List<Mesa> obtenerMesaEstadoPorLocal(Long localId, EstadoMesa estado) {
 
         return mesaRepository.findByLocalIdAndEstado(localId, estado);
     }
 
 
     public Mesa cambiarEstadoMesa(Long id, EstadoMesa nuevoEstado) {
-        Mesa mesa = buscarMesaPorId(id);
-        if (mesa != null) {
-            mesa.setEstado(nuevoEstado);
-            return mesaRepository.save(mesa);
-        }
-        return null;
+        Mesa mesa = mesaRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se puede cambiar el estado: Mesa " + id + " no existe."));
+        mesa.setEstado(nuevoEstado);
+        return mesaRepository.save(mesa);
     }
 
 

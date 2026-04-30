@@ -1,9 +1,11 @@
 package cl.marfuego.ms_locales.model;
 
 import cl.marfuego.ms_locales.enums.EstadoMesa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "mesas")
 public class Mesa {
 
     @Id
@@ -16,6 +18,7 @@ public class Mesa {
     @Enumerated(EnumType.STRING)
     private EstadoMesa estado = EstadoMesa.LIBRE;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "local_id", nullable = false)
     private Local local;
