@@ -1,0 +1,17 @@
+MS PRODUCTOS CONFIGURACION
+
+{
+    "tipo":"bebestible",
+    "nombre":"coca cola",
+    "costo":"1200"
+    "stock"
+}
+
+
+http://localhost:8081/api/productos
+GET
+POST
+
+http://localhost:8081/api/productos/{id}
+GET
+DELETE
