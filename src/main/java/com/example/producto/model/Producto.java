@@ -10,22 +10,26 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "local_id")
+    private Long localId;
     private String nombre;
-
     private double precio;
     @Enumerated(EnumType.STRING)
     private TipoDeProducto tipo;
-//stock
+    private int stockMinimo;
+    private int stock;
 
     public Producto() {
     }
 
-    public Producto(Long id, String nombre, double precio, TipoDeProducto tipo) {
+    public Producto(Long id, Long localId, String nombre, double precio, TipoDeProducto tipo, int stockMinimo, int stock) {
         this.id = id;
+        this.localId = localId;
         this.nombre = nombre;
         this.precio = precio;
         this.tipo = tipo;
+        this.stockMinimo = stockMinimo;
+        this.stock = stock;
     }
 
     public Long getId() {
@@ -34,6 +38,14 @@ public class Producto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(Long localId) {
+        this.localId = localId;
     }
 
     public String getNombre() {
@@ -58,5 +70,21 @@ public class Producto {
 
     public void setTipo(TipoDeProducto tipo) {
         this.tipo = tipo;
+    }
+
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

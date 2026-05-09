@@ -1,14 +1,18 @@
 MS PRODUCTOS CONFIGURACION
 
+
 {
-    "tipo":"bebestible",
-    "nombre":"coca cola",
-    "costo":"1200"
-    "stock"
+  "tipo": "INGREDIENTE",
+  "nombre": "Camarones Ecuatorianos",
+  "precio": 12500.0,
+  "stockMinimo": 10,
+  "stock": 50,
+  "localId": 1
 }
 
 
-http://localhost:8081/api/productos
+
+http://localhost:8082/api/productos
 GET
 POST
 
