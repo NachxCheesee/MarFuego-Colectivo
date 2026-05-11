@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -32,11 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-=======
-# IntelliJ IDEA
-.idea/
-*.iml
-out/
-gen/
-
->>>>>>> main
