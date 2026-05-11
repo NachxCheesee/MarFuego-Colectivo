@@ -1,0 +1,21 @@
+MS PRODUCTOS CONFIGURACION
+
+
+{
+  "tipo": "INGREDIENTE",
+  "nombre": "Camarones Ecuatorianos",
+  "precio": 12500.0,
+  "stockMinimo": 10,
+  "stock": 50,
+  "localId": 1
+}
+
+
+
+http://localhost:8082/api/productos
+GET
+POST
+
+http://localhost:8081/api/productos/{id}
+GET
+DELETE
