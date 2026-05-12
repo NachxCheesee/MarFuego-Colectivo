@@ -12,9 +12,10 @@ Sistema de arquitectura de microservicios diseñado para la gestión integral de
 
 ## Microservicios Implementados
 | # | Microservicio | Puerto | Descripción |
-| :--- | :--- | :--- | :--- |
-| 1 | ms-locales | 8081 | Gestión centralizada de sedes físicas y control de estado de mesas (Libre/Ocupada). |
-| 2 | ms-productos | 8082 | Gestión de catálogo de productos, control de stock (actual y mínimo) y validación de pertenencia a locales. |
+|:--|:--------------|:-------| :--- |
+| 1 | ms-locales    | 8081   | Gestión centralizada de sedes físicas y control de estado de mesas (Libre/Ocupada). |
+| 2 | ms-productos  | 8082   | Gestión de catálogo de productos, control de stock (actual y mínimo) y validación de pertenencia a locales. |
+| 3 | ms-empleados  | 8083   | Gestión integral del personal, administración de cargos (roles) y vinculación de trabajadores a sedes físicas con validación de existencia. |
 
 ## Tecnologías Utilizadas
 - **Java 17 / Spring Boot 3.x**: Framework base para el desarrollo de servicios.
