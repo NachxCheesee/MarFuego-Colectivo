@@ -94,9 +94,9 @@ public class ProductoService {
 
         // Lógica de stock mínimo usando los atributos del Model
         if (producto.getStock() <= producto.getStockMinimo()) {
-            System.out.println("Alerta: Stock bajo para" + producto.getNombre());
+            // Esto se verá en color amarillo/rojo en la consola de IntelliJ
+            System.err.println("⚠️ ALERTA DE STOCK: " + producto.getNombre() + " tiene solo " + producto.getStock());
         }
-
         return productoRepository.save(producto);
     }
 }
