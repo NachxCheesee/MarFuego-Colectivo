@@ -7,5 +7,6 @@ public enum Cargo {
     COCINERO,
     MESERO,
     CAJERO,
-    CONSERJE
+    CONSERJE,
+    DELIVERY
 }
