@@ -1,0 +1,18 @@
+{
+    "nombreCompleto":"Naxo Pop",
+    "cargo":"GERENTE",
+    "localId":1
+}
+
+http://localhost:8083/api/empleados
+GET
+POST
+
+http://localhost:8083/api/empleados/{id}
+GET
+DELETE
+PUT
+
+http://localhost:8083/api/empleados/{id}/detalle
+GET
+
