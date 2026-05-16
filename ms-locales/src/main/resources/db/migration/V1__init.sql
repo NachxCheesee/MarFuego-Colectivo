@@ -18,3 +18,28 @@ CREATE TABLE mesas (
 
 );
 
+INSERT INTO locales (nombre, direccion, ciudad) VALUES
+('MarFuego Centro', 'Urmeneta 456', 'Puerto Montt'),
+('MarFuego Pelluco', 'Juan Soler Manfredini 1200', 'Puerto Montt'),
+('MarFuego Ancud', 'Costanera Salvador Allende s/n', 'Ancud'),
+('MarFuego Castro', 'Blanco Encalada 300', 'Castro');
+
+-- Mesas para MarFuego Centro (local_id 1)
+INSERT INTO mesas (numero_mesa, capacidad, estado, local_id) VALUES
+(1, 4, 'LIBRE', 1),
+(2, 2, 'LIBRE', 1);
+
+-- Mesas para MarFuego Pelluco (local_id 2)
+INSERT INTO mesas (numero_mesa, capacidad, estado, local_id) VALUES
+(1, 6, 'LIBRE', 2),
+(2, 4, 'LIBRE', 2);
+
+-- Mesas para MarFuego Ancud (local_id 3)
+INSERT INTO mesas (numero_mesa, capacidad, estado, local_id) VALUES
+(1, 4, 'LIBRE', 3),
+(2, 4, 'LIBRE', 3);
+
+-- Mesas para MarFuego Castro (local_id 4)
+INSERT INTO mesas (numero_mesa, capacidad, estado, local_id) VALUES
+(1, 2, 'LIBRE', 4),
+(2, 8, 'LIBRE', 4);

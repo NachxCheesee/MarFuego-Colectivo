@@ -1,21 +1,58 @@
-MS PRODUCTOS CONFIGURACION
+======================================================
+MS PRODUCTOS CONFIGURACIÓN (Puerto 8082)
+======================================================
 
-
+// 1. JSON para CREAR un Ingrediente
 {
-  "tipo": "INGREDIENTE",
-  "nombre": "Camarones Ecuatorianos",
-  "precio": 12500.0,
-  "stockMinimo": 10,
-  "stock": 50,
-  "localId": 1
+    "localId": 1,
+    "nombre": "Saco de Papas",
+    "precio": 800.0,
+    "tipo": "INGREDIENTE",
+    "stockMinimo": 10,
+    "stock": 5
+}
+
+// 2. JSON para CREAR un Bebestible
+{
+    "localId": 1,
+    "nombre": "Jugo Natural",
+    "precio": 1500.0,
+    "tipo": "BEBESTIBLE",
+    "stockMinimo": 5,
+    "stock": 20
+}
+
+// 3. JSON para AGREGAR STOCK (Simulando la Orden de Compra del Proveedor)
+// Esto activará el cálculo automático del nuevo precio unitario
+{
+    "cantidad": 10,
+    "costoTotalCompra": 10000.0
+}
+
+// 4. JSON para QUITAR STOCK (Por venta o por merma)
+// El precio no cambia, solo se resta la cantidad física
+{
+    "cantidad": 2
 }
 
 
+======================================================
+RUTAS PARA POSTMAN (MS PRODUCTOS)
+======================================================
 
+// CRUD Básico de Productos
 http://localhost:8082/api/productos
-GET
-POST
+GET (Listar todos)
+POST (Crear nuevo)
 
-http://localhost:8081/api/productos/{id}
-GET
-DELETE
+http://localhost:8082/api/productos/{id}
+GET (Buscar por ID)
+PUT / PATCH (Actualizar producto)
+DELETE (Eliminar producto)
+
+// Gestión de Inventario (Las nuevas rutas)
+http://localhost:8082/api/productos/1/stock/agregar
+PATCH (Requiere el JSON #3 con cantidad y costoTotalCompra)
+
+http://localhost:8082/api/productos/1/stock/quitar
+PATCH (Requiere el JSON #4 solo con cantidad)

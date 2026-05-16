@@ -51,13 +51,6 @@ public class LocalService {
 
     }
 
-    public boolean existeLocalPorId(Long id) {
-
-        return localRepository.existsById(id);
-
-
-    }
-
     public void eliminarLocal(Long id) {
 
         if (!localRepository.existsById(id)) {

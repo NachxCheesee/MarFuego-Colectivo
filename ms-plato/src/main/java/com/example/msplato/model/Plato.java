@@ -12,22 +12,25 @@ public class Plato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long localId;
+    private String nombre;
     private double precioVenta;
-    private boolean disponibilidad;
+    private boolean disponible;
     @ElementCollection // Crea una tabla automática platos_producto_ids
-    @CollectionTable(name = "plato_productos", joinColumns = @JoinColumn(name = "plato_id"))
-    @Column(name = "producto_id")
-    private List<Long> productoIds = new ArrayList<>();
+    @CollectionTable(name = "plato_productos", joinColumns = @JoinColumn(name = "plato_id"))//configuramos esa tabla, le decimos que cree una columna plato_id
+    // para que sepa a que plato va a pertenecer cada ingredientes
+    @Column(name = "producto_id")//es la columna de nombre producto id que va a guardar los numeros de los ids
+    private List<Long> productoId = new ArrayList<>();
 
     public Plato() {
     }
 
-    public Plato(Long id, Long localId, double precioVenta, boolean disponibilidad, List<Long> productoIds) {
+    public Plato(Long id, Long localId, String nombre, double precioVenta, boolean disponible, List<Long> productoId) {
         this.id = id;
         this.localId = localId;
+        this.nombre = nombre;
         this.precioVenta = precioVenta;
-        this.disponibilidad = disponibilidad;
-        this.productoIds = productoIds;
+        this.disponible = disponible;
+        this.productoId = productoId;
     }
 
     public Long getId() {
@@ -46,6 +49,14 @@ public class Plato {
         this.localId = localId;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public double getPrecioVenta() {
         return precioVenta;
     }
@@ -54,19 +65,19 @@ public class Plato {
         this.precioVenta = precioVenta;
     }
 
-    public boolean isDisponibilidad() {
-        return disponibilidad;
+    public boolean isDisponible() {
+        return disponible;
     }
 
-    public void setDisponibilidad(boolean disponibilidad) {
-        this.disponibilidad = disponibilidad;
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
-    public List<Long> getProductoIds() {
-        return productoIds;
+    public List<Long> getProductoId() {
+        return productoId;
     }
 
-    public void setProductoIds(List<Long> productoIds) {
-        this.productoIds = productoIds;
+    public void setProductoId(List<Long> productoId) {
+        this.productoId = productoId;
     }
 }

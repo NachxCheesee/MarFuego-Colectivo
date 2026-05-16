@@ -1,42 +1,28 @@
-<<<<<<< HEAD
-HELP.md
+data/*
+!data/.gitkeep
+*.mv.db
+*.trace.db
 target/
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+build/
+.idea/
 *.iml
+*.iws
 *.ipr
-
-### NetBeans ###
+out/
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+.springBeans
+.apt_generated
+.sts4-cache
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-=======
-# IntelliJ IDEA
-.idea/
-*.iml
-out/
-gen/
-
->>>>>>> main
+.DS_Store
+Thumbs.db
+HELP.md

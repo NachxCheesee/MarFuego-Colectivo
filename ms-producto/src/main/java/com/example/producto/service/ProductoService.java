@@ -58,7 +58,7 @@ public class ProductoService {
         productoExistente.setNombre(dto.getNombre());
         productoExistente.setPrecio(dto.getPrecio());
         productoExistente.setTipo(dto.getTipo());
-
+        productoExistente.setStockMinimo(dto.getStockMinimo());
         // 3. Guardamos los cambios
         return productoRepository.save(productoExistente);
     }
@@ -77,8 +77,30 @@ public class ProductoService {
     public Producto agregarStock(Long id, MovimientoStockDto movimiento){
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(()->new ErrorNoEncontrado("producto no encontrado"));
-        //modificamos el stock del model
-        producto.setStock(producto.getStock()+movimiento.getCantidad());
+
+        //  LÓGICA DE NEGOCIO: Costo Promedio Ponderado (CPP)
+        // Verificamos si enviaron el costo de la compra desde Postman/Proveedor
+        if (movimiento.getCostoTotalCompra() != null && movimiento.getCostoTotalCompra() > 0) {
+
+            // 1. ¿Cuánto dinero en inventario tenemos ahora mismo de este producto?
+            double valorInventarioActual = producto.getStock() * producto.getPrecio();
+
+            // 2. ¿Cuánto pagamos por el stock nuevo?
+            double valorNuevoIngreso = movimiento.getCostoTotalCompra();
+
+            // 3. ¿Cuánto stock total tendremos al finalizar esta operación?
+            int nuevoStockTotal = producto.getStock() + movimiento.getCantidad();
+
+            // 4. Calculamos el nuevo precio unitario promedio
+            double nuevoPrecioPromedio = (valorInventarioActual + valorNuevoIngreso) / nuevoStockTotal;
+
+            // 5. Se lo asignamos al producto (redondeado a 2 decimales)
+            producto.setPrecio(Math.round(nuevoPrecioPromedio * 100.0) / 100.0);
+        }
+
+        // Finalmente, sumamos la cantidad al stock del model
+        producto.setStock(producto.getStock() + movimiento.getCantidad());
+
         return productoRepository.save(producto);
     }
     public Producto quitarStock(Long id, MovimientoStockDto movimiento) {

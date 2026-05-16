@@ -7,3 +7,22 @@ CREATE TABLE productos (
    stock_minimo INT NOT NULL,
    stock INT NOT NULL
 );
+-- Insertando Ingredientes para un Ceviche y un Lomo Saltado
+INSERT INTO productos (local_id, nombre, precio, tipo, stock_minimo, stock)
+VALUES (1, 'Camarones Ecuatorianos', 5000.0, 'INGREDIENTE', 10, 50);
+
+INSERT INTO productos (local_id, nombre, precio, tipo, stock_minimo, stock)
+VALUES (1, 'Limón Sutil', 500.0, 'INGREDIENTE', 20, 100);
+
+INSERT INTO productos (local_id, nombre, precio, tipo, stock_minimo, stock)
+VALUES (1, 'Cebolla Morada', 800.0, 'INGREDIENTE', 5, 30);
+
+INSERT INTO productos (local_id, nombre, precio, tipo, stock_minimo, stock)
+VALUES (1, 'Carne de Vacuno (Lomo)', 7000.0, 'INGREDIENTE', 10, 40);
+
+-- Insertando Bebestibles (Para probar que el micro de Platos los rechace)
+INSERT INTO productos (local_id, nombre, precio, tipo, stock_minimo, stock)
+VALUES (1, 'Coca Cola Original 350ml', 1200.0, 'BEBESTIBLE', 24, 48);
+
+INSERT INTO productos (local_id, nombre, precio, tipo, stock_minimo, stock)
+VALUES (1, 'Pisco Sour Artesanal', 4500.0, 'BEBESTIBLE', 10, 20);
