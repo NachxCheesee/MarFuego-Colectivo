@@ -34,7 +34,7 @@ public class ProductoController {
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
 
     }
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoDto dto){
         Producto productoActualizado = productoService.actualizarProducto(id, dto);
         return ResponseEntity.ok(productoActualizado);
@@ -45,7 +45,7 @@ public class ProductoController {
         productoService.eliminaProducto(id);
         return ResponseEntity.noContent().build(); // Devuelve 204 (Éxito sin contenido)
     }
-    //metodo para gestion del stock
+    //metodos para gestion del stock
     //metodo para agregar cantidad al stock
     @PatchMapping("/{id}/stock/agregar")
     public ResponseEntity<Producto> agregarStock(@PathVariable Long id, @RequestBody MovimientoStockDto movimiento) {

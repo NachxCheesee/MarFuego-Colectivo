@@ -1,8 +1,7 @@
-package com.example.producto.enums;
+package com.example.msplato.enums;
 
 public enum TipoDeProducto {
     INGREDIENTE,
     BEBESTIBLE,
     OTRO
-
 }
