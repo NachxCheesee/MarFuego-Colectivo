@@ -1,0 +1,18 @@
+{
+    "nombre":"DON JUAN",
+    "tipoInsumo":"Mariscos",
+    "tipoPersona": "NATURAL",
+    "telefono": "+56912121212",
+    "email": "Juanito@gmail.com",
+    "zona": "Puerto montt",
+    "estado":"ACTIVO"
+}
+
+
+http://localhost:8085/api/proveedores
+GET
+POST
+
+http://localhost:8085/api/proveedores/{id}
+GET
+DELETE
