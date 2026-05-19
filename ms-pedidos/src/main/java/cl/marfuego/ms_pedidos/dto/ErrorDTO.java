@@ -1,18 +1,19 @@
+<<<<<<<< HEAD:ms-pedidos/src/main/java/cl/marfuego/ms_pedidos/dto/ErrorDTO.java
+package cl.marfuego.ms_pedidos.dto;
+========
 package com.example.msplato.dto;
+>>>>>>>> main:ms-plato/src/main/java/com/example/msplato/dto/ErrorDto.java
 
 import java.time.LocalDateTime;
-
-public class ErrorDto {
-
+public class ErrorDTO {
     private int status;
-
     private String mensaje;
-
     private LocalDateTime timestamp;
 
-    public ErrorDto() {};
+    public ErrorDTO() {
+    }
 
-    public ErrorDto(int status, String mensaje, LocalDateTime timestamp) {
+    public ErrorDTO(int status, String mensaje, LocalDateTime timestamp) {
         this.status = status;
         this.mensaje = mensaje;
         this.timestamp = timestamp;
