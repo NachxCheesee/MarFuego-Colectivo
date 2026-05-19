@@ -18,8 +18,6 @@ Sistema de arquitectura de microservicios diseñado para la gestión integral de
 | 3 | ms-empleados   | 8083   | Gestión integral del personal, administración de cargos (roles) y vinculación de trabajadores a sedes físicas con validación de existencia.  |
 | 4 | ms-proveedores | 8085   | Gestión de proveedores locales (pescadores, agricultores, etc), control de órdenes de compra y cálculo de costo promedio de insumos.         |
 | 5 | ms-platos      | 8086   | Gestión del menú, validación de ingredientes (ms-productos), asignación a locales (ms-locales) y control de rentabilidad (Regla del 300%).   |
-| 4 | ms-proveedores | 8085   | Gestión de proveedores locales (pescadores, agricultores, etc), Gestion de los mismos y control de órdenes de compra de insumos perecederos. |
-
 ## Tecnologías Utilizadas
 - **Java 17 / Spring Boot 3.x**: Framework base para el desarrollo de servicios.
 - **Spring Data JPA + Hibernate**: Gestión de la persistencia y mapeo de entidades.
