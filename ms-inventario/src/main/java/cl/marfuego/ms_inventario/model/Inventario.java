@@ -25,11 +25,18 @@ public class Inventario {
     public Inventario() {
     }
 
+<<<<<<< HEAD
     public Inventario(long id, String nombre, long local_id, long productoId) {
         this.id = id;
         this.nombre = nombre;
         this.local_id = local_id;
         this.productoId = productoId;
+=======
+    public Inventario(long id, String nombre, long local_id) {
+        this.id = id;
+        this.nombre = nombre;
+        this.local_id = local_id;
+>>>>>>> f031bc9a3a54092b2de2ca9b7952fbcaac3f6319
     }
 
     public long getId() {
