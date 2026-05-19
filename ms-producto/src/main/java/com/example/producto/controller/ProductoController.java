@@ -45,7 +45,7 @@ public class ProductoController {
         productoService.eliminaProducto(id);
         return ResponseEntity.noContent().build(); // Devuelve 204 (Éxito sin contenido)
     }
-    //metodo para gestion del stock
+    //metodos para gestion del stock
     //metodo para agregar cantidad al stock
     @PatchMapping("/{id}/stock/agregar")
     public ResponseEntity<Producto> agregarStock(@PathVariable Long id, @RequestBody MovimientoStockDto movimiento) {

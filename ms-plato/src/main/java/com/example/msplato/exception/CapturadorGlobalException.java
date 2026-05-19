@@ -28,7 +28,6 @@ public class CapturadorGlobalException {
 
     @ExceptionHandler(ErrorNoEncontrado.class)
     public ResponseEntity<ErrorDto> manejarRecursoNoEncontrado(ErrorNoEncontrado ex) {
-
         ErrorDto error = new ErrorDto(
                 HttpStatus.NOT_FOUND.value(), // 404
                 ex.getMessage(),
@@ -59,7 +58,7 @@ public class CapturadorGlobalException {
     // Atrapamos cualquier otro error inesperado (500)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDto> manejarErrorGeneral(Exception ex) {
-
+        ex.printStackTrace();
         ErrorDto error = new ErrorDto(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Ocurrió un error inesperado en el sistema MarFuego",

@@ -1,6 +1,5 @@
-======================================================
 MS PRODUCTOS CONFIGURACIÓN (Puerto 8082)
-======================================================
+
 
 // 1. JSON para CREAR un Ingrediente
 {
@@ -35,10 +34,7 @@ MS PRODUCTOS CONFIGURACIÓN (Puerto 8082)
     "cantidad": 2
 }
 
-
-======================================================
 RUTAS PARA POSTMAN (MS PRODUCTOS)
-======================================================
 
 // CRUD Básico de Productos
 http://localhost:8082/api/productos
@@ -47,12 +43,12 @@ POST (Crear nuevo)
 
 http://localhost:8082/api/productos/{id}
 GET (Buscar por ID)
-PUT / PATCH (Actualizar producto)
+PATCH (Actualizar producto)
 DELETE (Eliminar producto)
 
 // Gestión de Inventario (Las nuevas rutas)
 http://localhost:8082/api/productos/1/stock/agregar
-PATCH (Requiere el JSON #3 con cantidad y costoTotalCompra)
+PATCH (Requiere el JSON cantidad y costoTotalCompra)
 
 http://localhost:8082/api/productos/1/stock/quitar
-PATCH (Requiere el JSON #4 solo con cantidad)
+PATCH (Requiere el JSON solo con cantidad)

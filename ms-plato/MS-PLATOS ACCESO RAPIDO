@@ -1,7 +1,5 @@
 
-======================================================
 MS PLATOS CONFIGURACIÓN (Puerto 8086)
-======================================================
 
 // JSON para crear un Plato Normal (Éxito)
 {
@@ -9,7 +7,7 @@ MS PLATOS CONFIGURACIÓN (Puerto 8086)
     "precioVenta": 21000.0,
     "disponible": true,
     "localId": 1,
-    "ingredientesId": [1, 2, 3]
+    "productoIds": [1, 2, 3]
 }
 
 // JSON para probar la Advertencia de Negocio R5 (Margen menor a 300%)
@@ -18,14 +16,14 @@ MS PLATOS CONFIGURACIÓN (Puerto 8086)
     "precioVenta": 5000.0,
     "disponible": true,
     "localId": 1,
-    "ingredientesId": [1]
+    "productoIds": [1]
 }
 
-http://localhost:8083/api/platos
+http://localhost:8086/api/platos
 GET
 POST
 
-http://localhost:8083/api/platos/{id}
+http://localhost:8086/api/platos/{id}
 GET
 PATCH
 DELETE

@@ -8,7 +8,6 @@ import com.example.msplato.enums.TipoDeProducto;
 import com.example.msplato.exception.custom.ErrorNoEncontrado;
 import com.example.msplato.model.Plato;
 import com.example.msplato.repository.PlatoRepository;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class PlatoService {
         return platoRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se encontró el plato: " + id));
 
     }
-    public Plato guardarPlato(PlatoDto dto) throws BadRequestException {
+    public Plato guardarPlato(PlatoDto dto) throws IllegalArgumentException {
         // 1. VALIDAMOS QUE EL LOCAL EXISTA
         try {
             localClient.obtenerLocalPorId(dto.getLocalId());
@@ -50,7 +49,7 @@ public class PlatoService {
 
             // 2. VALIDACIÓN CRÍTICA: ¿Es un ingrediente?
             if (producto.getTipo() != TipoDeProducto.INGREDIENTE) {
-                throw new BadRequestException("El producto '" + producto.getNombre() +
+                throw new IllegalArgumentException("El producto '" + producto.getNombre() +
                         "' no es un ingrediente. No puedes añadir " + producto.getTipo() + " a un plato");
             }
 
@@ -76,7 +75,7 @@ public class PlatoService {
         //guardamos
         return platoRepository.save(plato);
     }
-    public Plato actualizarPlato(Long id, PlatoDto dto) throws BadRequestException {
+    public Plato actualizarPlato(Long id, PlatoDto dto) throws IllegalArgumentException {
         Plato platoExistente = platoRepository.findById(id)
                 .orElseThrow(()-> new ErrorNoEncontrado(("El plato con ID " + id + " no existe.")));
         double costoTotalIngredientes = 0;
@@ -88,7 +87,7 @@ public class PlatoService {
 
             // 2. VALIDACIÓN CRÍTICA: ¿Es un ingrediente?
             if (producto.getTipo() != TipoDeProducto.INGREDIENTE) {
-                throw new BadRequestException("El producto '" + producto.getNombre() +
+                throw new IllegalArgumentException("El producto '" + producto.getNombre() +
                         "' no es un ingrediente. No puedes añadir " + producto.getTipo() + " a un plato.");
             }
 
@@ -116,7 +115,6 @@ public class PlatoService {
     public boolean existePlatoPorId(Long id) {
 
         return platoRepository.existsById(id);
-
 
     }
 

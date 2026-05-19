@@ -25,7 +25,7 @@ public class ProductoService {
     }
 
     public Producto buscaPorId(Long id){
-        return productoRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se encontró el local con ID: " + id));
+        return productoRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se encontró el producto con ID: " + id));
     }
 
     public Producto guardarProducto(ProductoDto dto){
