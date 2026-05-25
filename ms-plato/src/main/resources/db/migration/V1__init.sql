@@ -18,6 +18,7 @@ CREATE TABLE plato_productos (
      producto_id BIGINT NOT NULL,
      FOREIGN KEY (plato_id) REFERENCES platos(id) ON DELETE CASCADE
 );
+
 -- Ingredientes para el Ceviche (ID 1)
 INSERT INTO plato_productos (plato_id, producto_id) VALUES (1, 1); -- Camarones
 INSERT INTO plato_productos (plato_id, producto_id) VALUES (1, 2); -- Limón

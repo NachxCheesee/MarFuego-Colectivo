@@ -75,6 +75,7 @@ public class PlatoService {
         //guardamos
         return platoRepository.save(plato);
     }
+
     public Plato actualizarPlato(Long id, PlatoDto dto) throws IllegalArgumentException {
         Plato platoExistente = platoRepository.findById(id)
                 .orElseThrow(()-> new ErrorNoEncontrado(("El plato con ID " + id + " no existe.")));

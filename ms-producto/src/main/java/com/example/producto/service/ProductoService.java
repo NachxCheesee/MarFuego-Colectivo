@@ -101,6 +101,7 @@ public class ProductoService {
         // Finalmente, sumamos la cantidad al stock del model
         producto.setStock(producto.getStock() + movimiento.getCantidad());
 
+
         return productoRepository.save(producto);
     }
     public Producto quitarStock(Long id, MovimientoStockDto movimiento) {
