@@ -9,6 +9,8 @@ import cl.marfuego.ms_locales.model.Local;
 import cl.marfuego.ms_locales.model.Mesa;
 import cl.marfuego.ms_locales.repository.LocalRepository;
 import cl.marfuego.ms_locales.repository.MesaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.Optional;
 
 @Service
 public class LocalService {
+
+    private static final Logger log = LoggerFactory.getLogger(LocalService.class);
 
     private final LocalRepository localRepository;
 
@@ -28,19 +32,22 @@ public class LocalService {
     }
 
     public List<Local> listarLocales() {
-
+        log.info("[Service] Solicitando todos los locales a la base de datos.");
         return localRepository.findAll();
 
     }
 
     public Local buscarLocalPorId(Long id) {
-
-        return localRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se encontró el local con ID: " + id));
+        log.info("[Service] Buscando local por ID: {}", id);
+        return localRepository.findById(id).orElseThrow(() -> {
+            log.warn("[Service] ⚠️ Fallo: No se encontró el local con ID: {}", id);
+            return new ErrorNoEncontrado("No se encontró el local con ID: " + id);
+        });
 
     }
 
     public Local guardarLocal(LocalDto dto) {
-
+        log.info("[Service] Procesando guardado de un nuevo local: {}", dto.getNombre());
         // Convertimos el dto en una Entidad Local
         Local local = new Local();
         local.setNombre(dto.getNombre());
@@ -52,8 +59,9 @@ public class LocalService {
     }
 
     public void eliminarLocal(Long id) {
-
+        log.info("[Service] Intentando eliminar local con ID: {}", id);
         if (!localRepository.existsById(id)) {
+            log.warn("[Service] ⚠️ Fallo al eliminar: El local {} no existe en los registros.", id);
             throw new ErrorNoEncontrado("No se puede eliminar: El local " + id + " no existe.");
         }
         localRepository.deleteById(id);
@@ -65,21 +73,27 @@ public class LocalService {
     // Funciones para mesa
 
     public List<Mesa> listarMesas() {
-
+        log.info("[Service] Solicitando todas las mesas a la base de datos.");
         return mesaRepository.findAll();
 
     }
 
     public Mesa buscarMesaPorId(Long id) {
-
-        return mesaRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se encontró la mesa con ID: " + id));
+        log.info("[Service] Buscando mesa por ID: {}", id);
+        return mesaRepository.findById(id).orElseThrow(() -> {
+            log.warn("[Service] ⚠️ Fallo: No se encontró la mesa con ID: {}", id);
+            return new ErrorNoEncontrado("No se encontró la mesa con ID: " + id);
+        });
 
     }
 
     public Mesa guardarMesa(MesaDto dto) {
-
+        log.info("[Service] Iniciando flujo para crear mesa N°: {} para el local ID: {}", dto.getNumeroMesa(), dto.getLocalId());
         // 1. Buscamos el local al que pertenece la mesa (VITAL)
-        Local local = localRepository.findById(dto.getLocalId()).orElseThrow(() -> new ErrorNoEncontrado("No se pudo crear la mesa: Local " + dto.getLocalId() + " no existe."));
+        Local local = localRepository.findById(dto.getLocalId()).orElseThrow(() -> {
+            log.warn("[Service] ⚠️ Fallo al crear mesa: El local asociado ID {} no existe.", dto.getLocalId());
+            return new ErrorNoEncontrado("No se pudo crear la mesa: Local " + dto.getLocalId() + " no existe."); // <-- Aquí le borramos el ) extra
+        });
 
         // 2. Creamos la mesa y le "enchufamos" el local completo
         Mesa mesa = new Mesa();
@@ -98,8 +112,9 @@ public class LocalService {
 
 
     public void eliminarMesa(Long id) {
-
+        log.info("[Service] Intentando eliminar mesa con ID: {}", id);
         if (!mesaRepository.existsById(id)) {
+            log.warn("[Service] ⚠️ Fallo al eliminar: La mesa {} no existe en los registros.", id);
             throw new ErrorNoEncontrado("No se puede eliminar: La mesa " + id + " no existe.");
         }
         mesaRepository.deleteById(id);
@@ -107,13 +122,17 @@ public class LocalService {
 
 
     public List<Mesa> obtenerMesaEstadoPorLocal(Long localId, EstadoMesa estado) {
-
+        log.info("[Service] Filtrando mesas en BD para el local ID: {} con estado: {}", localId, estado);
         return mesaRepository.findByLocalIdAndEstado(localId, estado);
     }
 
 
     public Mesa cambiarEstadoMesa(Long id, EstadoMesa nuevoEstado) {
-        Mesa mesa = mesaRepository.findById(id).orElseThrow(() -> new ErrorNoEncontrado("No se puede cambiar el estado: Mesa " + id + " no existe."));
+        log.info("[Service] Intentando cambiar estado de mesa ID: {} a -> {}", id, nuevoEstado);
+        Mesa mesa = mesaRepository.findById(id).orElseThrow(() -> {
+            log.warn("[Service] ⚠️ Fallo al cambiar estado: La mesa {} no existe.", id);
+            return new ErrorNoEncontrado("No se puede cambiar el estado: Mesa " + id + " no existe.");
+        });
         mesa.setEstado(nuevoEstado);
         return mesaRepository.save(mesa);
     }
