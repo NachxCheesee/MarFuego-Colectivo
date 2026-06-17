@@ -2,25 +2,33 @@ package cl.marfuego.ms_locales.model;
 
 import cl.marfuego.ms_locales.enums.EstadoMesa;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "mesas")
+@Schema(name = "Mesa", description = "Entidad que representa una mesa física ubicada dentro de un local específico de MarFuego")
 public class Mesa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador único autoincremental (no se coloca de manera manual) de la mesa en la base de datos", example = "1")
     private Long id;
 
+    @Schema(description = "Número identificador físico de la mesa dentro del local", example = "5")
     private int numeroMesa;
+
+    @Schema(description = "Cantidad máxima de comensales que pueden sentarse en la mesa", example = "4")
     private int capacidad;
 
     @Enumerated(EnumType.STRING)
+    @Schema(description = "Estado actual de disponibilidad de la mesa", example = "LIBRE", allowableValues = {"LIBRE", "OCUPADA", "RESERVADA"})
     private EstadoMesa estado = EstadoMesa.LIBRE;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "local_id", nullable = false)
+    @Schema(description = "Local o sucursal al que pertenece físicamente esta mesa")
     private Local local;
 
 
