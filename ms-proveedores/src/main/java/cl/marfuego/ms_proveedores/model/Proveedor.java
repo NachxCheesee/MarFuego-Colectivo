@@ -2,33 +2,43 @@ package cl.marfuego.ms_proveedores.model;
 
 import cl.marfuego.ms_proveedores.enums.EstadoProveedor;
 import cl.marfuego.ms_proveedores.enums.TipoPersona;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "proveedores")
+@Schema(name = "Proveedor", description = "Entidad que representa a un distribuidor o proveedor de insumos de la cadena MarFuego")
 public class Proveedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador único autoincremental (no se coloca de manera manual) del proveedor en la base de datos", example = "1")
     private Long id;
 
+    @Schema(description = "Nombre de la empresa o del proveedor", example = "Distribuidora del Mar Ltda.")
     private String nombre;
 
     @Column(name = "tipo_insumo")
+    @Schema(description = "Categoría o tipo de insumos que provee (Mariscos, Verduras, Desechables, etc.)", example = "Mariscos congelados")
     private String tipoInsumo;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_persona")
+    @Schema(description = "Clasificación legal del proveedor", example = "JURIDICA", allowableValues = {"NATURAL", "JURIDICA"})
     private TipoPersona tipoPersona;
 
+    @Schema(description = "Teléfono de contacto del proveedor", example = "+56912345678")
     private String telefono;
 
+    @Schema(description = "Correo electrónico de contacto comercial", example = "ventas@distribuidoradelmar.cl")
     private String email;
 
+    @Schema(description = "Zona geográfica o sector de cobertura del proveedor", example = "Región de Los Lagos")
     private String zona;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
+    @Schema(description = "Estado operativo actual del proveedor", example = "ACTIVO", allowableValues = {"ACTIVO", "INACTIVO", "SUSPENDIDO"})
     private EstadoProveedor estado;
 
 
