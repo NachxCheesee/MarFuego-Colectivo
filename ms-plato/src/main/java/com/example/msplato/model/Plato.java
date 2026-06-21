@@ -1,5 +1,6 @@
 package com.example.msplato.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -7,14 +8,50 @@ import java.util.List;
 
 @Entity
 @Table(name = "platos")
+@Schema(
+        name = "plato",
+        description = "Representa a toda cosa que se puede preparar y servir en la cocina"
+)
 public class Plato {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(
+            title = "identificador unico para cada plato",
+            example = "1",
+            accessMode = Schema.AccessMode.READ_ONLY //campo solo de lectura y no es necesario
+            // hacer un post
+    )
     private Long id;
+    @Schema(
+            title = "identificador unico de cada local asociado al plato",
+            example = "1",
+            accessMode = Schema.AccessMode.READ_ONLY //campo solo de lectura y no es necesario
+            // hacer un post
+    )
     private Long localId;
+    @Schema(
+            title = "nombre del plato",
+            description = "nombre comercial del plato",
+            example = "arroz con pollo"
+    )
     private String nombre;
+    @Schema(
+            title = "precio del plato",
+            description = "valor que se le otorga al plato",
+            example = "90000"
+    )
     private double precioVenta;
+    @Schema(
+            title = "disponibilidad del plato",
+            description = "Indica si el plato está actualmente disponible para ser pedido en el menú",
+            defaultValue = "true"
+    )
     private boolean disponible;
+    @Schema(
+            title = "IDs de los productos del plato",
+            description = "Lista con los identificadores (IDs) de los productos o ingredientes que componen este plato",
+            example = "[1, 5, 12]"
+    )
     @ElementCollection // Crea una tabla automática platos_producto_ids
     @CollectionTable(name = "plato_productos", joinColumns = @JoinColumn(name = "plato_id"))//configuramos esa tabla, le decimos que cree una columna plato_id
     // para que sepa a que plato va a pertenecer cada ingredientes

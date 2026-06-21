@@ -3,6 +3,10 @@ package com.example.msplato.controller;
 import com.example.msplato.dto.PlatoDto;
 import com.example.msplato.model.Plato;
 import com.example.msplato.service.PlatoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
@@ -13,12 +17,29 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/platos")
+
+@Tag(
+     name = "platos",
+     description = "administracion de platos cocinados en el restaurante"
+
+)
 public class PlatoController {
     private final PlatoService platoService;
 
     public PlatoController(PlatoService platoService) {
         this.platoService = platoService;
+
     }
+    @Operation(
+            summary = "obtiene todos los platos del local",
+            description = "retorna la lista completa de platos que fueron ingresados en el local"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "consulta exitosa"),
+            @ApiResponse(responseCode = "500",
+                    description = "Error interno")
+    })
     @GetMapping
     public ResponseEntity<List<Plato>> listarPlatos(){
         return ResponseEntity.ok(platoService.listarPlatos());

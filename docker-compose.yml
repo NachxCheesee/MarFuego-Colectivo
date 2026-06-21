@@ -1,0 +1,94 @@
+services:
+  ms-locales:
+    build: ./ms-locales
+    container_name: ms-locales
+    ports:
+      - "8081:8081"
+    environment:
+      MS_LOCALES_URI: http://ms-locales:8081
+    depends_on:
+      - ms-locales
+
+  ms-productos:
+    build: ./ms-producto
+    container_name: ms-productos
+    ports:
+      - "8082:8082"
+    environment:
+      MS_PRODUCTO_URI: http://ms-producto:8082
+    depends_on:
+      - ms-productos
+
+  ms-empleados:
+    build: ./ms-empleados
+    container_name: ms-empleados
+    ports:
+      - "8083:8083"
+    environment:
+      MS_EMPLEADOS_URI: http://ms-empleados:8083
+    depends_on:
+      - ms-empleados
+
+  ms-inventario:
+    build: ./ms-inventario
+    container_name: ms-inventario
+    ports:
+      - "8084:8084"
+    environment:
+      MS_INVENTARIO_URI: http://ms-inventario:8084
+    depends_on:
+      - ms-inventario
+
+  ms-proveedores:
+    build: ./ms-proveedores
+    container_name: ms-proveedores
+    ports:
+      - "8085:8085"
+    environment:
+      MS_PROVEEDORES_URI: http://ms-proveedores:8085
+    depends_on:
+      - ms-proveedores
+
+  ms-platos:
+    build: ./ms-plato
+    container_name: ms-platos
+    ports:
+      - "8086:8086"
+    environment:
+      MS_PLATO_URI: http://ms-plato:8086
+    depends_on:
+      - ms-platos
+
+  ms-pedidos:
+    build: ./ms-pedidos
+    container_name: ms-pedidos
+    ports:
+      - "8087:8087"
+    environment:
+      MS_PEDIDOS_URI: http://ms-pedidos:8087
+    depends_on:
+      - ms-pedidos
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+
+    environment:
+      MS_LOCALES_URI: http://ms-locales:8081
+      MS_PRODUCTO_URI: http://ms-producto:8082
+      MS_EMPLEADOS_URI: http://ms-empleados:8083
+      MS_INVENTARIO_URI: http://ms-inventario:8084
+      MS_PROVEEDORES_URI: http://ms-proveedores:8085
+      MS_PLATO_URI: http://ms-plato:8086
+      MS_PEDIDOS_URI: http://ms-pedidos:8087
+
+    depends_on:
+      - ms-locales
+      - ms-productos
+      - ms-empleados
+      - ms-inventario
+      - ms-proveedores
+      - ms-platos
+      - ms-pedidos
