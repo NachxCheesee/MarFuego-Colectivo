@@ -1,6 +1,5 @@
 package cl.marfuego.ms_pedidos.dto;
 
-import cl.marfuego.ms_locales.enums.EstadoMesa;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -16,17 +15,14 @@ public class MesaDTO {
     @Max(value = 20, message = "Por seguridad, el máximo son 20 personas por mesa")
     private Integer capacidad;
 
-    private EstadoMesa estado;
-
     @NotNull(message = "El id del local al que pertenece es obligatorio")
     private Long localId;
 
     public MesaDTO() {}
 
-    public MesaDTO(Integer numeroMesa, Integer capacidad, EstadoMesa estado, Long localId) {
+    public MesaDTO(Integer numeroMesa, Integer capacidad, Long localId) {
         this.numeroMesa = numeroMesa;
         this.capacidad = capacidad;
-        this.estado = estado;
         this.localId = localId;
     }
 
@@ -44,14 +40,6 @@ public class MesaDTO {
 
     public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
-    }
-
-    public EstadoMesa getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EstadoMesa estado) {
-        this.estado = estado;
     }
 
     public Long getLocalId() {
