@@ -6,8 +6,6 @@ services:
       - "8081:8081"
     environment:
       MS_LOCALES_URI: http://ms-locales:8081
-    depends_on:
-      - ms-locales
 
   ms-productos:
     build: ./ms-producto
@@ -15,9 +13,8 @@ services:
     ports:
       - "8082:8082"
     environment:
-      MS_PRODUCTO_URI: http://ms-producto:8082
-    depends_on:
-      - ms-productos
+      MS_PRODUCTO_URI: http://ms-productos:8082
+      MS_LOCALES_URI: http://ms-locales:8081
 
   ms-empleados:
     build: ./ms-empleados
@@ -26,8 +23,7 @@ services:
       - "8083:8083"
     environment:
       MS_EMPLEADOS_URI: http://ms-empleados:8083
-    depends_on:
-      - ms-empleados
+      MS_LOCALES_URI: http://ms-locales:8081
 
   ms-inventario:
     build: ./ms-inventario
@@ -36,8 +32,8 @@ services:
       - "8084:8084"
     environment:
       MS_INVENTARIO_URI: http://ms-inventario:8084
-    depends_on:
-      - ms-inventario
+      MS_LOCALES_URI: http://ms-locales:8081
+      MS_PRODUCTO_URI: http://ms-productos:8082
 
   ms-proveedores:
     build: ./ms-proveedores
@@ -46,8 +42,6 @@ services:
       - "8085:8085"
     environment:
       MS_PROVEEDORES_URI: http://ms-proveedores:8085
-    depends_on:
-      - ms-proveedores
 
   ms-platos:
     build: ./ms-plato
@@ -55,9 +49,9 @@ services:
     ports:
       - "8086:8086"
     environment:
-      MS_PLATO_URI: http://ms-plato:8086
-    depends_on:
-      - ms-platos
+      MS_PLATO_URI: http://ms-platos:8086
+      MS_LOCALES_URI: http://ms-locales:8081
+      MS_PRODUCTO_URI: http://ms-productos:8082
 
   ms-pedidos:
     build: ./ms-pedidos
@@ -66,24 +60,23 @@ services:
       - "8087:8087"
     environment:
       MS_PEDIDOS_URI: http://ms-pedidos:8087
-    depends_on:
-      - ms-pedidos
+      MS_LOCALES_URI: http://ms-locales:8081
+      MS_EMPLEADOS_URI: http://ms-empleados:8083
+      MS_PLATO_URI: http://ms-platos:8086
 
   api-gateway:
     build: ./api-gateway
     container_name: api-gateway
     ports:
       - "8080:8080"
-
     environment:
       MS_LOCALES_URI: http://ms-locales:8081
-      MS_PRODUCTO_URI: http://ms-producto:8082
+      MS_PRODUCTO_URI: http://ms-productos:8082
       MS_EMPLEADOS_URI: http://ms-empleados:8083
       MS_INVENTARIO_URI: http://ms-inventario:8084
       MS_PROVEEDORES_URI: http://ms-proveedores:8085
-      MS_PLATO_URI: http://ms-plato:8086
+      MS_PLATO_URI: http://ms-platos:8086
       MS_PEDIDOS_URI: http://ms-pedidos:8087
-
     depends_on:
       - ms-locales
       - ms-productos

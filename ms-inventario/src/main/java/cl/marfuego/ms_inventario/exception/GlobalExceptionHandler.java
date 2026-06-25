@@ -1,7 +1,7 @@
 package cl.marfuego.ms_inventario.exception;
 
+import cl.marfuego.ms_inventario.DTO.ErrorDto;
 import cl.marfuego.ms_inventario.exception.custom.ErrorNoEncontrado;
-import com.example.producto.dto.ErrorDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

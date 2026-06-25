@@ -1,15 +1,15 @@
 package cl.marfuego.ms_inventario.DTO;
 import java.time.LocalDateTime;
 
-public class ErrorDTO {
+public class ErrorDto {
     private int Status;
     private String mensaje;
     private LocalDateTime fecha;
 
-    public ErrorDTO() {
+    public ErrorDto() {
     }
 
-    public ErrorDTO(int status, String mensaje, LocalDateTime fecha) {
+    public ErrorDto(int status, String mensaje, LocalDateTime fecha) {
         Status = status;
         this.mensaje = mensaje;
         this.fecha = fecha;

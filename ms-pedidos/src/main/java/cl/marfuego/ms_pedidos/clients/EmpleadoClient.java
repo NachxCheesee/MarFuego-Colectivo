@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "ms-empleados", url = "https://localhost:8083")
+@FeignClient(name = "ms-empleados", url = "${MS_EMPLEADOS_URI:http://localhost:8083}")
 public interface EmpleadoClient {
     @GetMapping("/empleados/{id}")
     EmpleadoDTO obtenerEmpleadoPorId(@PathVariable("id")Long id);
