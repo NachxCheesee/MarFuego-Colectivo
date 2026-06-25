@@ -1,11 +1,37 @@
 package com.example.msplato.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "LocalDto", description = "Objeto de transferencia de datos que representa a un local o sucursal del restaurante"
+)
 public class LocalDto {
+    @Schema(
+            title = "identificador unico del local",
+            example = "1",
+            accessMode = Schema.AccessMode.READ_ONLY
+    )
     private Long id;
+
+    @Schema(
+            title = "nombre del local",
+            description = "nombre comercial o de fantasía de la sucursal",
+            example = "Mar Fuego - Sede Central"
+    )
     private String nombre;
 
+    @Schema(
+            title = "dirección del local",
+            description = "ubicación física exacta de la sucursal",
+            example = "Av. Costanera 123"
+    )
     private String direccion;
 
+    @Schema(
+            title = "ciudad del local",
+            description = "ciudad donde se encuentra operando el local",
+            example = "Puerto Montt"
+    )
     private String ciudad;
 
     public LocalDto() {
