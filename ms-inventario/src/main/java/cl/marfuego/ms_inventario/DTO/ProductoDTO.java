@@ -1,17 +1,24 @@
 package cl.marfuego.ms_inventario.DTO;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
+@Schema(name = "ProductoDTO", description = "Estructura de datos requerida para agregar/modificar un producto del inventario")
 public class ProductoDTO {
+    @Schema(description = "Identificador unico del producto", example = "1")
     private Long id;
+    @Schema(description = "Identificador unico del local al que pertenece este producto", example = "3")
     private Long localId;
+    @Schema(description = "Nombre del producto que fue agregado al inventario")
     private String nombre;
+    @Schema(description = "Precio del producto en pesos chilenos", example = "$12.000")
     private double precio;
-
+    @Schema(description = "Cantidad minima del stock que debe mantenerse para evitar el desabastecimiento", example = "20")
     private int stockMinimo;
+    @Schema(description = "Cantidad actual del inventario", example = "150")
     private int stock;
 
     public ProductoDTO() {
