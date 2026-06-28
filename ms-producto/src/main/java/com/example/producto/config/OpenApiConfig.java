@@ -1,4 +1,4 @@
-package com.example.msplato.config;
+package com.example.producto.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -13,8 +13,8 @@ public class OpenApiConfig {
     public OpenAPI configurarOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("MarFuego - API Platos") // Título personalizado
-                        .description("Microservicio encargado de la gestión y control de todos los platos de MarFuego") // Su descripción
+                        .title("MarFuego - API Productos") // Título personalizado
+                        .description("Microservicio encargado de la gestión de los productos de MarFuego") // Su descripción
                         .version("1.0.0")
                         .contact(new Contact()
                                 .name("Equipo de Desarrollo MarFuego")

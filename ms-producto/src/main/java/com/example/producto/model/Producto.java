@@ -1,24 +1,68 @@
 package com.example.producto.model;
 
 import com.example.producto.enums.TipoDeProducto;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "productos")
+@Tag(name = "Producto",
+        description = "representa a todo lo que se puede vender en el local"
+)
 public class Producto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(
+            title = "identificador unico del producto",
+            example = "1",
+            accessMode = Schema.AccessMode.READ_ONLY // campo solo de lectura
+    )
     private Long id;
-    @Column(name = "local_id")
-    private Long localId;
-    private String nombre;
-    private double precio;
-    @Enumerated(EnumType.STRING)
-    private TipoDeProducto tipo;
-    private int stockMinimo;
-    private int stock;
 
+    @Column(name = "local_id")
+    @Schema(
+            title = "identificador unico de cada local asociado al producto",
+            example = "1",
+            accessMode = Schema.AccessMode.READ_ONLY // campo solo de lectura
+    )
+    private Long localId;
+
+    @Schema(
+            title = "nombre del producto",
+            description = "nombre descriptivo del insumo o ingrediente",
+            example = "Salmón fresco"
+    )
+    private String nombre;
+
+    @Schema(
+            title = "precio del producto",
+            description = "costo o valor unitario del producto en el inventario",
+            example = "15000"
+    )
+    private double precio;
+
+    @Enumerated(EnumType.STRING)
+    @Schema(
+            title = "tipo de producto",
+            description = "clasificación o categoría del producto dentro del sistema",
+            example = "{INGREDIENTE, BEBESTIBLE, OTRO}"
+    )
+    private TipoDeProducto tipo;
+
+    @Schema(
+            title = "stock mínimo",
+            description = "cantidad límite que debe haber en el inventario antes de requerir reabastecimiento",
+            example = "10"
+    )
+    private int stockMinimo;
+
+    @Schema(
+            title = "stock actual",
+            description = "cantidad física del producto que se encuentra actualmente disponible",
+            example = "45"
+    )
+    private int stock;
     public Producto() {
     }
 

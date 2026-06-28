@@ -1,6 +1,7 @@
 package com.example.msplato.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "platos")
-@Schema(
+@Tag(
         name = "plato",
         description = "Representa a toda cosa que se puede preparar y servir en la cocina"
 )
