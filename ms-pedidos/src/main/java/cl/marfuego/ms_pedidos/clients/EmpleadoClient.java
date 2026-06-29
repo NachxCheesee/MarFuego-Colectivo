@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "ms-empleados", url = "${MS_EMPLEADOS_URI:http://localhost:8083}")
 public interface EmpleadoClient {
-    @GetMapping("/empleados/{id}")
+    @GetMapping("api/empleados/{id}")
     EmpleadoDTO obtenerEmpleadoPorId(@PathVariable("id")Long id);
 }

@@ -1,20 +1,32 @@
 package cl.marfuego.ms_pedidos.dto;
 
 import cl.marfuego.ms_pedidos.enums.TipoPedido;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
+@Schema(name = "PedidoDTO", description = "Objeto de transferencia de datos para la creación y la actualización de pedidos dependiendo del tipo de pedido")
 public class PedidoDTO {
+
     @NotNull(message = "El tipo de pedido es obligatorio, favor de rellenar con (LOCAL o DELIVERY)")
+    @Schema(description = "Tipo de pedido: local o delivery", example = "local")
     private TipoPedido tipoPedido;
+
+    @Schema(description = "Id del local donde se realizará el pedido", example = "1")
     private Long local_id;
+
+    @Schema(description = "Id de la mesa asignada al pedido", example = "3")
     private Long mesa_id;
+
+    @Schema(description = "Id del empleado que gestiona el pedido", example = "3")
     private Long empleado_id;
+
     @NotEmpty(message = "el pedido debe contener almenos un plato, favor de rellenar")
     @Valid
+    @Schema(description = "Lista de detalles del pedido, como platos y cantidades", required = true)
     private List<DetallePedidoDTO> detalles;
 
     public PedidoDTO() {

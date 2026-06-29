@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "ms-locales", url = "${MS_LOCALES_URI:http://localhost:8081}")
 public interface LocalClient {
-    @GetMapping("/locales/{id}")
+    @GetMapping("api/locales/{id}")
     LocalDTO obtenerLocalPorId(@PathVariable("id")Long id);
-    @GetMapping("/mesas/{id}")
+    @GetMapping("api/locales/mesas/{id}")
     MesaDTO obtenerMesaPorId(@PathVariable("id")Long id);
 }

@@ -1,9 +1,19 @@
 package cl.marfuego.ms_inventario.DTO;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+@Schema(name = "LocalDto", description = "Objeto de transferencia de datos que representa la información básica de la sucursal de asignación del inventario")
 public class LocalDTO {
+
+    @Schema(description = "Identificador único del local de asignación", example = "1")
     private Long id;
+
+    @Schema(description = "Nombre comercial o de fantasía de la sucursal", example = "MarFuego Costanera")
     private String nombre;
+
+    @Schema(description = "Dirección física exacta donde se ubica el local", example = "Calle Falsa 123")
     private String direccion;
+
+    @Schema(description = "Ciudad de ubicación del establecimiento", example = "Puerto Montt")
     private String ciudad;
 
     public LocalDTO() {
