@@ -1,0 +1,13 @@
+{
+    "tipoPedido" : "LOCAL",
+    "local_id" : 1,
+    "mesa_id" : 1,
+    "empleado_id" : 1,
+    "detalles" : [
+        {"plato_id" : 1, "cantidad": 2}
+    ]
+}
+
+http://localhost:8087/api/pedidos
+GET
+POST
