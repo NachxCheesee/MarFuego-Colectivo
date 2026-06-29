@@ -51,7 +51,7 @@ public class Inventario {
         this.id = id;
     }
 
-    public String getIngrediente() {
+    public String getNombre() {
         return nombre;
     }
 
