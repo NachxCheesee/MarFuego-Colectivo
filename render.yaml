@@ -1,0 +1,48 @@
+# ===================================================================
+# Blueprint de Render (despliegue automático "Infrastructure as Code")
+# Crea la base de datos PostgreSQL y el servicio web ya conectados.
+# ===================================================================
+
+databases:
+  # 1. Configuramos la base de datos para locales
+  - name: bd-locales
+    databaseName: localesdb
+    user: localesuser
+    plan: free
+    region: oregon
+
+services:
+  # 2. Configuramos el microservicio web
+  - type: web
+    name: ms-locales-service
+    runtime: docker
+    plan: free
+    region: oregon
+
+    # ¡ESTA LÍNEA ES VITAL PARA TU PROYECTO!
+    # Le dice a Render que solo debe mirar dentro de esta carpeta
+    rootDir: ms-locales
+
+    dockerfilePath: ./Dockerfile
+    envVars:
+      # Estas variables se toman AUTOMÁTICAMENTE de la base de datos bd-locales
+      - key: DB_HOST
+        fromDatabase:
+          name: bd-locales
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: bd-locales
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: bd-locales
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: bd-locales
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: bd-locales
+          property: password
