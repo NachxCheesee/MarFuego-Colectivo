@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "ms-plato", url = "${MS_PLATO_URI:http://localhost:8086}")
 public interface PlatoClient {
-    @GetMapping("/plato/{id}")
+    @GetMapping("api/platos/{id}")
     PlatoDTO obtenerPlatoPorId(@PathVariable("id")Long id);
 }
